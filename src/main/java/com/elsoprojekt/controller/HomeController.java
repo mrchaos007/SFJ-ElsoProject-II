@@ -14,17 +14,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.elsoprojekt.domain.Story;
 import com.elsoprojekt.repository.StoryRepository;
+import com.elsoprojekt.service.StoryService;
 
 @Controller
 public class HomeController {
 	
-	@Autowired
-	StoryRepository storyRepo;
+	private StoryService storyService;
 	
+	@Autowired
+	public void setStoryService(StoryService storyService) {
+		this.storyService = storyService;
+	}
+
 	@RequestMapping("/")
 	public String stories(Model model, Locale locale) {
 		model.addAttribute("pageTitle", "Minden napre egy SFJ sztori");
-		model.addAttribute("stories", getStories());
+		model.addAttribute("stories", storyService.getStories());
 		System.out.println(String.format("Request received. Language: %s, Counry: %s %n",  locale.getLanguage(), locale.getDisplayCountry()));
 		return "stories";
 	}
@@ -42,11 +47,11 @@ public class HomeController {
 		return "exceptionHandler";
 	}
 	
-	private List<Story> getStories() {
-		
-		List<Story> stories = storyRepo.findAll();
-		
-		return stories;
+//	private List<Story> getStories() {
+//		
+//		List<Story> stories = storyRepo.findAll();
+//		
+//		return stories;
 //		ArrayList<Story> stories = new ArrayList<>();
 		
 //		Story story1 = new Story();
@@ -66,5 +71,5 @@ public class HomeController {
 		
 //		return stories;
 		
-	}
+//	}
 }

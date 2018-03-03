@@ -1,0 +1,2 @@
+insert into Blogger(age, name) VALUES (21, 'Gyula');
+insert into STORY (title, content, posted, blogger_id) values ('Teszt cím', 'Teszt tartalom', CURRENT_DATE(), (select id FROM BLOGGER where name = 'Gyula') );
