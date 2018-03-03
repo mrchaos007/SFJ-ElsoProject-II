@@ -1,11 +1,11 @@
 package com.elsoprojekt.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.elsoprojekt.domain.Story;
+import com.elsoprojekt.repository.StoryRepository;
 
 @Controller
 public class HomeController {
+	
+	@Autowired
+	StoryRepository storyRepo;
 	
 	@RequestMapping("/")
 	public String stories(Model model, Locale locale) {
@@ -38,8 +42,12 @@ public class HomeController {
 		return "exceptionHandler";
 	}
 	
-	private ArrayList<Story> getStories() {
-		ArrayList<Story> stories = new ArrayList<>();
+	private List<Story> getStories() {
+		
+		List<Story> stories = storyRepo.findAll();
+		
+		return stories;
+//		ArrayList<Story> stories = new ArrayList<>();
 		
 //		Story story1 = new Story();
 //		story1.setTitle("Első sztorim");
@@ -56,7 +64,7 @@ public class HomeController {
 //		stories.add(story1);
 //		stories.add(story2);
 		
-		return stories;
+//		return stories;
 		
 	}
 }
