@@ -2,15 +2,27 @@ package com.elsoprojekt.domain;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Story {
 	
+	@GeneratedValue
+	@Id
+	private Long id;
 	private String title;
 	private String content;
 	private Date posted;
-	private String author;
+	@ManyToOne
+	private Blogger blogger;
+	
+	private Story() {}
 	
 	public String getTitle() {
-		return title;
+		 return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
@@ -27,16 +39,24 @@ public class Story {
 	public void setPosted(Date posted) {
 		this.posted = posted;
 	}
-	public String getAuthor() {
-		return author;
+	public Blogger getBlogger() {
+		return blogger;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setBlogger(Blogger blogger) {
+		this.blogger = blogger;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "Story [title=" + title + ", content=" + content + ", posted=" + posted + ", author=" + author + "]";
+		return "Story [title=" + title + ", content=" + content + ", posted=" + posted + ", blogger=" + blogger + "]";
 	}
 	
 	
