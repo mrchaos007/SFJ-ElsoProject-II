@@ -2,6 +2,7 @@ package com.elsoprojekt.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,10 @@ public class Story {
 	@Id
 	private Long id;
 	private String title;
+	
+	@Column(columnDefinition = "TEXT")
 	private String content;
+	
 	private Date posted;
 	@ManyToOne
 	private Blogger blogger;
