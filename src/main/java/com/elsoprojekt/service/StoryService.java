@@ -40,6 +40,10 @@ public class StoryService {
 	public Story getSpecificStory(String title) {
 		return storyRepo.findByTitle(title);
 	}
+
+	public List<Story> getStoriesByBloggerName(String name) {
+		return storyRepo.findAllByBloggerNameIgnoreCaseOrderByPostedDesc(name);
+	}
 	
 //	@PostConstruct
 //	public void init() {
